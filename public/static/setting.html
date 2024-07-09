@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-10/12  h-screen bg-slate-200 mx-auto  ">
+        <br>
+        <p class="text-lime-700 text-3xl font-semibold ml-24 mt-10">Profile</p>
+        <a href="/home"> <button class="float-right mr-20 text-lime-700 text-3xl font-semibold">HOME</button> </a>
+        <img src="../images/dp2.jpeg" alt="no image" class="w-2/12  mt-16 mx-auto rounded-full">
+
+
+        <form action="/changeprofile" method="post">
+
+        <div class="w-4/12 bg-slate-100 ml-32 mt-24 h-24"> 
+            <p class="text-lg ml-8 text-yellow-600">NAME:</p>
+            
+            <input type="text" name="setname" id="setname" class="w-10/12 h-16 ml-8 bg-slate-100">
+        </div>
+
+        <div class="w-4/12 bg-slate-100 ml-32 mt-24 h-24"> 
+            <p class="text-lg ml-8 text-yellow-600">ABOUT: </p>
+        
+            <input type="text" name="about" id="about" class="w-10/12 h-16 ml-8 bg-slate-100">
+        </div>
+        <button type="submit" class="text-lime-700 text-2xl font-semibold ml-40 mt-8 border-2 border-gray-400 rounded-xl p-2" >change</button>
+
+    </form>
+    </div>
+
+
+
+    <script>
+
+        
+  </script>
+
+
+
+</body>
+</html>

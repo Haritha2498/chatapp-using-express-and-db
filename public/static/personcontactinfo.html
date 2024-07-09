@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>person contact info</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="h-screen">
+    <div class="w-8/12 bg-gray-200 mx-auto mt-[5%] p-10 h-[80%]">
+<p class="text-2xl font-semibold">PERSON PROFILE</p>
+ <a id="home" onclick="gohome()"> <p class="text-2xl font-semibold float-right">HOME</p></a>
+        <div class="grid gap-4 mt-10 h-[60%]">
+            <img src="../images/dp2.jpeg" alt="" class="w-48 ml-20 h-48">
+
+            <div class="inline-flex">
+                <p class=" text-xl ml-20">NAME:</p>
+                <span id="name" class="text-teal-700 text-2xl ml-2"></span>
+            </div>
+            <div class="inline-flex">
+                <p class=" text-xl ml-20">EMAIL:</p>
+                <span id="email" class="text-teal-700 text-xl ml-2"></span>
+            </div>
+            <div class="inline-flex">
+                <p class=" text-xl ml-20">ABOUT:</p>
+                <span id="about" class="text-teal-700 text-xl ml-2"></span>
+            </div>
+        </div>
+        
+        <!-- <p class="text-red-700 font-bold">DELETE CHATS</p>
+        <p class="text-red-700 font-bold">BLOCK USER</p> -->
+
+    </div>
+</div>
+
+<script>
+
+
+    async function gohome(){
+        const name=window.location.pathname.split('/').pop();
+        const url=`/chat/${name}`
+        document.getElementById('home').href=url;
+        window.location.href=url;
+    }
+
+    async function getpersonalinfo(){
+        const name=window.location.pathname.split('/').pop();
+        console.log(name);
+        const url=`/getpersonalinfo/${name}`
+        try{
+            const response=await fetch(`/getpersonalinfo/${name}`)
+            const data=await response.json()
+            console.log(data)
+            const namee=data.usename
+            document.getElementById("name").innerHTML=name.toUpperCase();
+            document.getElementById("email").innerHTML=data.email;
+            document.getElementById("about").innerHTML=data.about;
+
+
+        }
+        catch(error){
+            console.log("error in personalinfo html"+error)
+        }
+
+    }
+
+    document.addEventListener('DOMContentLoaded',getpersonalinfo)
+</script>
+
+
+</body>
+</html>

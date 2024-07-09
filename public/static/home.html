@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="inline-flex w-full h-screen" >
+    <div class="w- bg-black w-[10%] text-gray-200"> 
+        <img src="../images/dp2.jpeg"  class="w-[40%] mx-auto rounded-full mt-10" alt="">
+        <h3 class="text-base mt-4 text-center" id="userprofilename"></h3>
+        <a href="/home"> <img src="../images/msg.jpeg" alt="" class="bg-black mt-14 w-[60%] mx-auto"> </a>
+        <h4 class="text-center">HOME</h4>
+        <a href="/setting"><img src="../images/setting.png" alt="" class=" w-[40%] mx-auto mt-14"></a> 
+        <h4 class="text-center">SETTING</h4>
+        <h3 class="mt-20 ml-[30%] mr-[30%] "> <a href="/">Log_out</a></h3> 
+    </div>
+
+
+
+    <div class="w-[20%] bg-slate-300" id="middiv">
+        <br>
+        <h3 class="text-2xl font-bold ml-10"> Chats</h3>
+        <!-- <img src="../images/addperson.png" alt="" class="w-8 mr-16 float-right" onclick="funimage()"> -->
+        <!-- <input type="text" placeholder="search" class="w-2/3 mt-6 ml-12 h-8 border-[1px] border-black rounded-2xl pl-3 "> -->
+        <div id="friendsContainer"></div>
+    </div>
+    
+    <div class="w-[70%] bg-slate-100  "> 
+            <p class="text-center mt-44 text-4xl font-bold">BEGIN A CHAT <br>HERE.. </p>
+
+        <!-- <img src="../images/home.jpeg" alt="" class="w-12/12 h-full ml-10 mt-24"> -->
+    </div>
+
+
+</div>
+
+
+<script>
+        let usesrname="";
+    
+    //FUNCTION TO  DISPLAY THE USER NAME ON BLACK DIV
+
+    async function loadprofile(){
+        try{
+            const response=await fetch('/profile');
+            const data=await response.json();
+            console.log(data);
+            username=data.setname;
+            const s=document.getElementById('userprofilename');
+            s.innerHTML=data.setname;
+        }
+        catch(error){
+            console.log("error in profile loading")
+        }
+    }
+
+
+    //FUNCTION TO DISPLAY FRIENDS LIST
+
+
+    async function loadfriends(){
+        try{
+            const response=await fetch('/getfriends');
+            const data=await response.json();
+            console.log(data)
+
+            const container = document.getElementById('friendsContainer');
+
+                    data.forEach(friend => {
+                        if(username!==friend.setname)
+                        {
+                    const div = document.createElement('div');
+                    div.className = 'inline-flex bg-slate-300 mt-10 w-full';
+
+                    const friend_name=friend.setname;
+
+                    div.onclick = () => {
+                        window.location.href =`/chat/${friend_name}`;
+                    }
+
+                    const img = document.createElement('img');
+                    img.src = "../images/dp2.jpeg";
+                    img.className = 'w-12 ml-4 rounded-full';
+                    img.alt = '';
+
+                    const span = document.createElement('span');
+                    span.className = 'mt-4 ml-6';
+                    span.textContent = friend.setname;
+
+                    div.appendChild(img);
+                    div.appendChild(span);
+
+                    container.appendChild(div);
+                }
+    });
+        }
+        catch(error){
+            console.log("error inloading friend chat");
+            console.log(error);
+        }
+    }
+    
+    
+    
+    async function getfriendmsg()
+    {
+        // document.getElementById("temp").innerHTML="feg"
+        const name=window.location.pathname.split('/').pop();
+        const url=`/getfriendmsg/${name}`;
+        const rec_area=document.getElementById('friendmsg');
+        const send_area=document.getElementById('mymsg');
+        
+        try{
+
+            const response=await fetch(`/getfriendmsg/${name}`);
+
+            const data=await response.json();
+            console.log(data)       //this data includes both send mesesage and received meassage;
+
+            const sendmessages=data.mymsg;
+            const receivedmessage=data.friendmsg;
+
+            receivedmessage.forEach(object =>{
+                const span = document.createElement('span');
+                    span.className = "w-auto h-auto bg-gray-200 float-left  rounded-3xl px-6  mr-10 ";
+
+                    // const date=object.time;
+                    // dt = date.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%fZ")
+                    // hour = dt.hour
+                    // minute = dt.minute
+                    // const time=hour+""+minute;
+
+                    span.textContent = object.msg
+                    
+
+                    const br = document.createElement('br');
+                    const br1 = document.createElement('br');
+
+                    rec_area.appendChild(span);
+                    rec_area.appendChild(br);
+                    rec_area.appendChild(br1);
+            })
+
+
+            sendmessages.forEach(object =>{
+                const span = document.createElement('span');
+                    span.className = "w-auto h-auto bg-gray-200 float-right  rounded-3xl px-6  mr-10 ";
+                    span.textContent = object.msg
+
+                    
+
+                    const br = document.createElement('br');
+                    const br1 = document.createElement('br');
+
+                    send_area.appendChild(span);
+                    send_area.appendChild(br);
+                    send_area.appendChild(br1);
+            })
+
+
+
+        }
+        catch(error){
+            console.log("error inloading getfriendmessages");
+            console.log(error);
+        }
+
+        
+    }
+    
+    document.addEventListener('DOMContentLoaded',getfriendmsg)      
+    
+    document.addEventListener('DOMContentLoaded',loadprofile)
+    document.addEventListener('DOMContentLoaded',loadfriends)
+
+</script>
+
+</body>
+</html>

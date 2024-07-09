@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGN_IN</title>
+    <!-- <link rel="stylesheet" href="signin.css"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    
+</head>
+<body class="bg-[url('../images/im3.jpg')] bg-center bg-cover bg-no-repeat h-screen">
+<br>
+
+<h2 class="text-5xl text-blue-100 mt-[5%] ml-[15%]">SIGN UP</h2>
+    <div class="w-[55%] text-2xl mx-auto mt-[5%] border-2 border-slate-300 shadow-2xl shadow-gray-500" >
+
+        <h3 class="ml-24 text-gray-100 mb-6">Create a new Account</h3>
+<form action="/signup" method="POST" id="signupform">
+
+    <input class="w-[50%] h-[5%] mt-4 ml-[20%] p-2 bg-slate-100  hover:bg-blue-100" type="text" placeholder=" User name" class="in1" id="username" name="username">
+    <br>
+    <input class="w-[50%] h-[5%] mt-4 ml-[20%] p-2 hover:bg-blue-100" type="email" placeholder="Email id" class="in1" id="useremail" name="useremail">
+    <br>
+    <input class="w-[50%] h-[5%] mt-4 ml-[20%] p-2 hover:bg-blue-100" type="password" placeholder="Password" class="in1" id="password" name="password">
+    <span id="pid1" class="text-emerald-500 ml-[30%] mt-10"> </span>
+    <br>
+    <input class="w-[50%] h-[5%] mt-4 ml-[20%] p-2 hover:bg-blue-100" type="password" placeholder="Password again" class="in1" id="pass2" name="pass2">
+    <br>
+    
+    <span id="pid2" class="text-red-500 ml-[30%] mt-10"></span>
+    <br>
+    <button class="w-3/6 h-10 bg-slate-100 border-2 rounded-2xl mt-12 ml-[20%] text-blue-700 hover:bg-blue-200" type="submit" > SIGN UP  </button>
+
+</form>
+
+    <p class="text-center mt-10 text-neutral-100">Already a user.. <a href="/login" class="text-blue-300 ml-10"> login </a> </p>
+    
+
+</div>
+
+<script>
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value
+        const email = document.getElementById('useremail').value;
+        const password = document.getElementById('password').value;
+        const confirmpassword = document.getElementById('pass2').value;
+
+        if(password.length < 6) {
+            document.getElementById('pid1').textContent = 'Password is too short. It should be atleast 6 charecters'
+            return
+        }
+        
+        if(password!= confirmpassword) {
+            document.getElementById('pid2').textContent = "Password do not match";
+            return
+        }
+
+        document.getElementById('signupform').submit();
+    }
+    document.getElementById('signupform').addEventListener('submit',handleSubmit);
+</script>
+
+</body>
+</html>

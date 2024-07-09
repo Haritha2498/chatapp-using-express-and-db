@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+
+</head>
+<body class="bg-[url('../images/im3.jpg')] bg-center bg-cover bg-no-repeat h-screen">
+    <h2 class="text-5xl text-blue-100 mt-[5%] ml-[15%]">LOG_IN</h2>
+
+
+    <div class="w-[55%] text-2xl mx-auto mt-[5%] border-2 border-slate-300 shadow-2xl shadow-gray-500">
+        <form action="/login" method="POST">
+            <input class="w-[50%] h-[5%] mt-[10%] ml-[20%] p-2 hover:bg-blue-100" type="text" placeholder=" User name" class="in1" id="username" name="username">
+            <br>
+            <input class="w-[50%] h-[5%] mt-4 ml-[20%] p-2 hover:bg-blue-100" type="password" placeholder="Password" class="in1" id="password" name="password">
+            <br> <br> <br>
+            <button class="w-3/6 h-10 bg-slate-100 border-2 rounded-2xl mt-12 ml-[20%] text-blue-700 hover:bg-blue-200" type="submit">LOG IN </button>
+        </form>
+    <p class="mt-10 ml-96 text-neutral-100">New User... <a href="/signup" class="text-blue-300 ml-10"> Sign_up</a> </p>
+</div>
+
+</body>
+</html>
